@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 export default {
   ssr: false,
   /*
@@ -32,7 +33,7 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    '@nuxtjs/eslint-module',
+
     [
       '@nuxtjs/firebase',
       {
