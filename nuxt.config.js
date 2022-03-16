@@ -1,5 +1,5 @@
 export default {
-  mode: 'spa',
+  ssr: false,
   /*
    ** Headers of the page
    */
@@ -37,16 +37,24 @@ export default {
       '@nuxtjs/firebase',
       {
         config: {
-          apiKey: 'AIzaSyDG_gasyorLNjDv6eBmeSnV321WHkCODlU',
-          authDomain: 'nuxt-fire-vuexfire.firebaseapp.com',
-          databaseURL: 'https://nuxt-fire-vuexfire.firebaseio.com',
-          projectId: 'nuxt-fire-vuexfire',
-          storageBucket: '',
-          messagingSenderId: '1048167249658',
-          appId: '1:1048167249658:web:d45b765280a64ed4',
+          // apiKey: 'AIzaSyDG_gasyorLNjDv6eBmeSnV321WHkCODlU',
+          // authDomain: 'nuxt-fire-vuexfire.firebaseapp.com',
+          // databaseURL: 'https://nuxt-fire-vuexfire.firebaseio.com',
+          // projectId: 'nuxt-fire-vuexfire',
+          // storageBucket: '',
+          // messagingSenderId: '1048167249658',
+          // appId: '1:1048167249658:web:d45b765280a64ed4',
+          apiKey: 'AIzaSyAiT1Qs-B-qqkwSxXewNmDOzDrhgiGiRvM',
+          authDomain: 'cah-dummy.firebaseapp.com',
+          projectId: 'cah-dummy',
+          storageBucket: 'cah-dummy.appspot.com',
+          messagingSenderId: '778366957576',
+          appId: '1:778366957576:web:c82a75703baa96fec979bd',
+          measurementId: 'G-MM5S0VP1PE',
         },
         services: {
           firestore: true,
+          auth: true,
         },
       },
     ],
