@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 export default {
+  components: true,
   ssr: false,
   /*
    ** Headers of the page
@@ -55,7 +56,14 @@ export default {
         },
         services: {
           firestore: true,
-          auth: true,
+          auth: {
+            persistence: 'local', // default
+            initialize: {
+              onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED_MUTATION',
+              onAuthStateChangedAction: 'onAuthStateChangedAction',
+              subscribeManually: false
+            },
+          }
         },
       },
     ],
