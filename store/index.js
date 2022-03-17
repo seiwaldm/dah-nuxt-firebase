@@ -4,7 +4,7 @@ export const state = () => ({
   countDocument: {
     count: null,
   },
-  gameCollection: {}
+  gameCollection: null
 });
 export const mutations = {
   ...vuexfireMutations,
