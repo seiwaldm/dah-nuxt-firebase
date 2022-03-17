@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import contentComponent from '@/components/contentComponent'
+import contentComponent from "@/components/contentComponent";
 
 export default {
   components: {
@@ -12,10 +12,10 @@ export default {
   /**  Bind Vuexfire on client-side: */
   async mounted() {
     try {
-      await this.$store.dispatch('bindCountDocument')
+      await this.$store.dispatch("bindCountDocument");
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
   },
-}
+};
 </script>
