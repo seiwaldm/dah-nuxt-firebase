@@ -34,19 +34,6 @@
       <p>You are logged in with {{ authUser.email }}.</p>
       <Btn color="primary" outlined @click="logout">Logout</Btn>
     </div>
-    <client-only>
-      <Codeblock>
-        <pre>
-async createUser() {
-  try { 
-    await this.$fire.auth.createUserWithEmailAndPassword('foo@foo.foo', 'test')
-  } catch (e) { 
-    alert(e) 
-  }
-}
-        </pre>
-      </Codeblock>
-    </client-only>
   </div>
 </template>
 

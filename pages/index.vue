@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <p>Hello! To start a new game please enter your name:</p>
-    <input type="text" v-model="playerName" />
-    <button @click="createGame">Create New Game</button>
-    <auth></auth>
+  <div class="container">
+    <div>
+      <p>Hello! To start a new game please enter your name:</p>
+      <input type="text" v-model="playerName" />
+      <button @click="createGame">Create New Game</button>
+    </div>
+    <div class="auth"><auth></auth></div>
   </div>
 </template>
 
@@ -39,7 +41,8 @@ export default {
 </script>
 
 <style scoped>
-auth {
-  outline: 3px solid red;
+.container {
+  display: grid;
+  place-items: center;
 }
 </style>
