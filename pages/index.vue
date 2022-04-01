@@ -5,7 +5,6 @@
       <input type="text" v-model="playerName" />
       <button @click="createGame">Create New Game</button>
     </div>
-    <div class="auth"><auth></auth></div>
   </div>
 </template>
 
@@ -16,13 +15,11 @@ export default {
       playerName: "",
     };
   },
-  // /**  DEMO - Bind Vuexfire on client-side */
-  // fetch({ redirect }) {
-  //   redirect('/spa-mode')
-  // },
+
   async mounted() {
     try {
       await this.$store.dispatch("bindGameCollection");
+      await this.$store.dispatch("bindUserCollection");
     } catch (e) {
       console.error(e);
     }
@@ -30,11 +27,18 @@ export default {
 
   methods: {
     async createGame() {
-      const gameId = new Date().toISOString().replace(/[^0-9]/g, "");
+      const res = await this.$fire.auth.signInAnonymously();
+      const uid = res.user.uid;
+      this.$fire.firestore
+        .collection("users")
+        .doc(uid)
+        .set({ name: this.playerName });
+
+      const gameId = Math.floor(Date.now() * Math.random()).toString(36);
       this.$fire.firestore
         .collection("games")
         .doc(gameId)
-        .set({ creator: this.playerName });
+        .set({ creator: uid });
     },
   },
 };

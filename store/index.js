@@ -1,10 +1,8 @@
 import { vuexfireMutations, firestoreAction } from 'vuexfire';
 
 export const state = () => ({
-  countDocument: {
-    count: null,
-  },
-  gameCollection: null
+  gameCollection: null,
+  userCollection: null
 });
 export const mutations = {
   ...vuexfireMutations,
@@ -23,15 +21,6 @@ export const mutations = {
 };
 
 export const actions = {
-  bindCountDocument: firestoreAction(async function ({ bindFirestoreRef }) {
-    const ref = this.$fire.firestore
-      .collection('countCollection')
-      .doc('countDocument');
-    await bindFirestoreRef('countDocument', ref, { wait: true });
-  }),
-  unbindCountDocument: firestoreAction(function ({ unbindFirestoreRef }) {
-    unbindFirestoreRef('countDocument', false);
-  }),
 
   bindGameCollection: firestoreAction(async function ({ bindFirestoreRef }) {
     const ref = this.$fire.firestore
@@ -40,6 +29,14 @@ export const actions = {
   }),
   unbindGameCollection: firestoreAction(function ({ unbindFirestoreRef }) {
     unbindFirestoreRef('gameCollection', false);
+  }),
+  bindUserCollection: firestoreAction(async function ({ bindFirestoreRef }) {
+    const ref = this.$fire.firestore
+      .collection('users');
+    await bindFirestoreRef('userCollection', ref, { wait: true });
+  }),
+  unbindUserCollection: firestoreAction(function ({ unbindFirestoreRef }) {
+    unbindFirestoreRef('userCollection', false);
   }),
 
   onAuthStateChangedAction: (ctx, { authUser, claims }) => {
@@ -53,7 +50,4 @@ export const actions = {
 
 };
 export const getters = {
-  count(state) {
-    return state.countDocument.count;
-  },
 };
