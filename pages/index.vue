@@ -39,6 +39,8 @@ export default {
         .collection("games")
         .doc(gameId)
         .set({ creator: uid });
+
+      this.$router.push("/" + gameId);
     },
   },
 };
