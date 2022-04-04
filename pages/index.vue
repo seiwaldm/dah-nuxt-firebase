@@ -16,14 +16,14 @@ export default {
     };
   },
 
-  async mounted() {
-    try {
-      await this.$store.dispatch("bindGameCollection");
-      await this.$store.dispatch("bindUserCollection");
-    } catch (e) {
-      console.error(e);
-    }
-  },
+  // async mounted() {
+  //   try {
+  //     await this.$store.dispatch("bindGameCollection");
+  //     await this.$store.dispatch("bindUserCollection");
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // },
 
   methods: {
     async createGame() {

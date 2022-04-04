@@ -2,9 +2,10 @@
   <div>
     <p>Game-Data: {{ game }}</p>
     <br />
-    <p>Path/ID: {{ $route.path }}</p>
+    <p>Path/ID: {{ $route.params }}</p>
   </div>
 </template>
+//
 <script>
 export default {
   data() {
@@ -21,6 +22,7 @@ export default {
 
     // subscribe to changes:
     ref.onSnapshot((doc) => {
+      console.log(doc);
       this.game = doc.data();
     });
   },
