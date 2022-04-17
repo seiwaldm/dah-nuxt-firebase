@@ -50,5 +50,6 @@ export default {
 .container {
   display: grid;
   place-items: center;
+  min-height: 100vh;
 }
 </style>

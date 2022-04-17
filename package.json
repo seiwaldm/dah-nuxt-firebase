@@ -21,6 +21,7 @@
     "vuexfire": "^3.2.5"
   },
   "devDependencies": {
+    "@nuxtjs/vuetify": "^1.12.3",
     "nodemon": "^2.0.1",
     "prettier": "^2.0.4"
   }
