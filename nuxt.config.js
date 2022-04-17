@@ -39,13 +39,6 @@ export default {
       '@nuxtjs/firebase',
       {
         config: {
-          // apiKey: 'AIzaSyDG_gasyorLNjDv6eBmeSnV321WHkCODlU',
-          // authDomain: 'nuxt-fire-vuexfire.firebaseapp.com',
-          // databaseURL: 'https://nuxt-fire-vuexfire.firebaseio.com',
-          // projectId: 'nuxt-fire-vuexfire',
-          // storageBucket: '',
-          // messagingSenderId: '1048167249658',
-          // appId: '1:1048167249658:web:d45b765280a64ed4',
           apiKey: "AIzaSyAnLhDGY9RgazRkWY69OWt8ct1YqvOHlYo",
           authDomain: "dah-nuxt-firebase-3345c.firebaseapp.com",
           databaseURL: "https://dah-nuxt-firebase-3345c-default-rtdb.europe-west1.firebasedatabase.app",
