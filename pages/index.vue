@@ -2,8 +2,8 @@
   <div class="container">
     <div>
       <p>Hello! To start a new game please enter your name:</p>
-      <input type="text" v-model="playerName" />
-      <button @click="createGame">Create New Game</button>
+      <v-text-field label="Name" v-model="playerName"></v-text-field>
+      <v-btn @click="createGame">Create New Game</v-btn>
     </div>
   </div>
 </template>
