@@ -1,9 +1,26 @@
 <template>
   <div class="container">
     <div>
-      <p>Hello! To start a new game please enter your name:</p>
-      <v-text-field label="Name" v-model="playerName"></v-text-field>
-      <v-btn @click="createGame">Create New Game</v-btn>
+      <v-card>
+        <v-card-title
+          >Hello! To start a new game please enter your name:</v-card-title
+        >
+        <v-card-text>
+          <v-text-field label="Name" v-model="playerName"></v-text-field>
+          <v-select
+            v-model="chosenDecks"
+            :items="deckNames"
+            label="Decks"
+            multiple
+            chips
+            hint="Choose your decks!"
+            persistent-hint
+          ></v-select>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn @click="createGame">Create New Game</v-btn>
+        </v-card-actions>
+      </v-card>
     </div>
   </div>
 </template>
@@ -13,8 +30,16 @@ export default {
   data() {
     return {
       playerName: "",
-      decks: [],
+      chosenDecks: [],
     };
+  },
+
+  computed: {
+    deckNames() {
+      if (this.$store.state.decks !== null)
+        return this.$store.state.decks.map((deck) => deck.name);
+      return "";
+    },
   },
 
   // async mounted() {
@@ -27,14 +52,15 @@ export default {
   // },
 
   async mounted() {
-    this.$fire.firestore
-      .collection("decks")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          this.decks.push(doc.data());
-        });
-      });
+    // this.$fire.firestore
+    //   .collection("decks")
+    //   .get()
+    //   .then((querySnapshot) => {
+    //     querySnapshot.forEach((doc) => {
+    //       this.decks.push(doc.data());
+    //     });
+    //   });
+    await this.$store.dispatch("bindDecks");
   },
 
   methods: {
