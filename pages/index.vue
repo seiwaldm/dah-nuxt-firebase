@@ -13,6 +13,7 @@ export default {
   data() {
     return {
       playerName: "",
+      decks: [],
     };
   },
 
@@ -24,6 +25,17 @@ export default {
   //     console.error(e);
   //   }
   // },
+
+  async mounted() {
+    this.$fire.firestore
+      .collection("decks")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.decks.push(doc.data());
+        });
+      });
+  },
 
   methods: {
     async createGame() {
