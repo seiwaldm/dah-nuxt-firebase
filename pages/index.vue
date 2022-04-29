@@ -13,6 +13,8 @@
             label="Decks"
             multiple
             chips
+            deletable-chips
+            clearable
             hint="Choose your decks!"
             persistent-hint
           ></v-select>
@@ -38,7 +40,7 @@ export default {
     deckNames() {
       if (this.$store.state.decks !== null)
         return this.$store.state.decks.map((deck) => deck.name);
-      return "";
+      return [];
     },
   },
 
@@ -76,7 +78,7 @@ export default {
       this.$fire.firestore
         .collection("games")
         .doc(gameId)
-        .set({ creator: uid });
+        .set({ creator: uid, deckNames: this.chosenDecks });
 
       this.$router.push("/" + gameId);
     },
