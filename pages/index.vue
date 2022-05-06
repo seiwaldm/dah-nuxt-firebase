@@ -78,7 +78,18 @@ export default {
       this.$fire.firestore
         .collection("games")
         .doc(gameId)
-        .set({ creator: uid, deckNames: this.chosenDecks });
+        .set({
+          creator: uid,
+          deckNames: this.chosenDecks,
+          players: [
+            {
+              name: this.playerName,
+              id: uid,
+              points: 0,
+              hand: [],
+            },
+          ],
+        });
 
       this.$router.push("/" + gameId);
     },

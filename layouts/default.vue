@@ -1,5 +1,5 @@
 <template>
   <v-app>
-    <v-content><nuxt /></v-content>
+    <v-main><nuxt /></v-main>
   </v-app>
 </template>
