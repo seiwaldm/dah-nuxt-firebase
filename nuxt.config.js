@@ -1,8 +1,5 @@
 /* eslint-disable prettier/prettier */
 export default {
-  router: {
-    base: '/'
-  },
   components: true,
   ssr: true,
   // mode: "spa",
