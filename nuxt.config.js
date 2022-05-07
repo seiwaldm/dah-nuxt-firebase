@@ -35,7 +35,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [
+  buildModules: [
     '@nuxtjs/vuetify',
     [
       '@nuxtjs/firebase',
