@@ -91,7 +91,7 @@ export default {
           ],
         });
 
-      this.$router.push("/" + gameId);
+      this.$router.push("/game/" + gameId);
     },
   },
 };

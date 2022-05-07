@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import userLogin from "../components/user-login.vue";
+import userLogin from "../../components/user-login.vue";
 export default {
   components: { userLogin },
   data() {
