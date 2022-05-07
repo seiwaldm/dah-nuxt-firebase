@@ -8,10 +8,10 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
     "dev": "nuxt",
-    "build": "nuxt build --spa",
+    "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "deploy": "npm run generate && firebase deploy --only hosting --project nuxt-fire-vuexfire"
+    "deploy": "npm run generate && firebase deploy --only hosting --project dah-nuxt-firebase-3345c"
   },
   "dependencies": {
     "@nuxtjs/firebase": "^7.3.0",

@@ -1,13 +1,14 @@
 /* eslint-disable prettier/prettier */
 export default {
+  router: {
+    base: '/'
+  },
   components: true,
-  ssr: false,
+  ssr: true,
+  // mode: "spa",
   /*
    ** Headers of the page
    */
-  generate: {
-    dir: 'docs'
-  },
   head: {
     title: process.env.npm_package_name || '',
     meta: [
