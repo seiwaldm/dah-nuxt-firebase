@@ -7,6 +7,7 @@
         v-if="game && isLoggedIn"
         :players="game.players"
       ></player-list>
+
       <v-btn v-if="canStart" @click="startGame">Start Game</v-btn>
     </div>
   </v-container>
@@ -53,6 +54,7 @@ export default {
     this.$fire.auth.onAuthStateChanged((user) => {
       if (user) {
         this.isLoggedIn = true;
+        console.log(user);
       }
     });
   },
@@ -80,6 +82,8 @@ export default {
 
     async startGame() {
       this.gameStarted = true;
+
+      //make heap
 
       //deal cards
 

@@ -2,7 +2,7 @@
 export default {
   components: true,
   ssr: true,
-  runInNewContext: false,
+
   // mode: "spa",
   /*
    ** Headers of the page
