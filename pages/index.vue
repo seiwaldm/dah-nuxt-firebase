@@ -81,6 +81,7 @@ export default {
         .set({
           creator: uid,
           deckNames: this.chosenDecks,
+          gameStarted: false,
           players: [
             {
               name: this.playerName,

@@ -1,8 +1,8 @@
 <template>
-  <v-container class="game-screen">
+  <v-container class="game-screen" v-if="game">
     <user-login v-if="!isLoggedIn" @login="addPlayer"></user-login>
 
-    <div class="game-lobby" v-if="!gameStarted">
+    <div class="game-lobby" v-if="!game.gameStarted">
       <player-list
         v-if="game && isLoggedIn"
         :players="game.players"
@@ -10,6 +10,9 @@
 
       <v-btn v-if="canStart" @click="startGame">Start Game</v-btn>
     </div>
+
+    <v-btn @click="startGame">Debug game start</v-btn>
+    <div class="runningGame" v-if="game.gameStarted"></div>
   </v-container>
 </template>
 
@@ -22,7 +25,6 @@ export default {
       game: null,
       gameRef: null,
       isLoggedIn: false,
-      gameStarted: false,
     };
   },
 
@@ -57,6 +59,8 @@ export default {
         console.log(user);
       }
     });
+
+    await this.$store.dispatch("bindDecks");
   },
 
   methods: {
@@ -81,13 +85,53 @@ export default {
     },
 
     async startGame() {
-      this.gameStarted = true;
+      await this.gameRef.update({
+        gameStarted: true,
+      });
 
-      //make heap
+      //make heap:
+      await this.makeHeap();
 
       //deal cards
+      await this.dealCards();
 
       //determine start player/master
+      await this.gameRef.update({
+        cardMaster: 0,
+      });
+    },
+
+    async makeHeap() {
+      const allDecks = this.$store.state.decks;
+      const blackPile = [];
+      const whitePile = [];
+      const ourDecks = allDecks.filter((deck) =>
+        this.game.deckNames.includes(deck.name)
+      );
+      ourDecks.forEach((deck) => {
+        deck.black.forEach((card) => blackPile.push(card));
+        deck.white.forEach((card) => whitePile.push(card));
+      });
+
+      await this.gameRef.update({
+        blackPile: blackPile,
+        whitePile: whitePile,
+      });
+    },
+
+    async dealCards() {
+      this.game.players.forEach((player) => {
+        while (player.hand.length < 10) {
+          const cardNumber = Math.floor(
+            Math.random() * this.game.whitePile.length
+          );
+          player.hand.push(this.game.whitePile[cardNumber]);
+        }
+      });
+
+      await this.gameRef.update({
+        players: this.game.players,
+      });
     },
   },
 };
