@@ -11,8 +11,15 @@
       <v-btn v-if="canStart" @click="startGame">Start Game</v-btn>
     </div>
 
-    <v-btn @click="startGame">Debug game start</v-btn>
-    <div class="runningGame" v-if="game.gameStarted"></div>
+    <v-btn v-if="!game.gameStarted" @click="startGame">Debug game start</v-btn>
+    <v-btn v-if="game.gameStarted" @click="game.cardMaster++"
+      >Debug next round</v-btn
+    >
+    <div class="runningGame" v-if="game.gameStarted">
+      <v-card elevation="10" outlined dark
+        ><v-card-text>{{ game.blackCard.text }}</v-card-text></v-card
+      >
+    </div>
   </v-container>
 </template>
 
@@ -28,11 +35,33 @@ export default {
     };
   },
 
+  watch: {
+    isCardMaster() {
+      console.log("new round");
+      const blackCard = this.game.blackPile[
+        Math.floor(Math.random() * this.game.blackPile.length)
+      ];
+      this.gameRef.update({
+        blackCard: blackCard,
+      });
+    },
+  },
+
   computed: {
     canStart() {
       if (this.game && this.$fire.auth.currentUser) {
         if (this.game.players.length > 2)
           return this.$fire.auth.currentUser.uid === this.game.creator;
+      }
+      return false;
+    },
+    isCardMaster() {
+      if (this.game && this.game.cardMaster > -1) {
+        console.log("card master");
+        return (
+          this.game.players[this.game.cardMaster].id ===
+          this.$fire.auth.currentUser.uid
+        );
       }
       return false;
     },
