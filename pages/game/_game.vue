@@ -19,6 +19,7 @@
       <v-card elevation="10" outlined dark
         ><v-card-text>{{ game.blackCard.text }}</v-card-text></v-card
       >
+      <my-hand :hand="me.hand"></my-hand>
     </div>
   </v-container>
 </template>
@@ -64,6 +65,14 @@ export default {
         );
       }
       return false;
+    },
+    me() {
+      if (this.game && this.$fire.auth.currentUser) {
+        return this.game.players.find(
+          (player) => player.id === this.$fire.auth.currentUser.uid
+        );
+      }
+      return null;
     },
   },
 
