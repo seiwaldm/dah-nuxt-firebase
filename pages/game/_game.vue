@@ -17,9 +17,14 @@
     >
     <div class="runningGame" v-if="game.gameStarted">
       <v-card elevation="10" outlined dark
-        ><v-card-text>{{ game.blackCard.text }}</v-card-text></v-card
+        ><v-card-text v-if="game.blackCard">{{
+          game.blackCard.text
+        }}</v-card-text></v-card
       >
-      <my-hand :hand="me.hand"></my-hand>
+      <my-hand :hand="me.hand" @chooseCard="chooseCard"></my-hand>
+      <v-btn color="accent" elevation="2" @click="lockCards"
+        >Lock-in chosen Cards</v-btn
+      >
     </div>
   </v-container>
 </template>
@@ -33,6 +38,7 @@ export default {
       game: null,
       gameRef: null,
       isLoggedIn: false,
+      chosenCards: [],
     };
   },
 
@@ -118,6 +124,7 @@ export default {
           id: uid,
           points: 0,
           hand: [],
+          chosenCards: [],
         }),
       });
     },
@@ -169,6 +176,22 @@ export default {
 
       await this.gameRef.update({
         players: this.game.players,
+      });
+    },
+
+    chooseCard(index) {
+      this.chosenCards.push(index);
+    },
+
+    async lockCards() {
+      this.$fire.firestore.runTransaction(async (transaction) => {
+        const game = await transaction.get(this.gameRef);
+        const data = game.data();
+        data.players.find(
+          (player) => player.id === this.$fire.auth.currentUser.uid
+        ).chosenCards = this.chosenCards;
+        transaction.update(this.gameRef, data);
+        this.chosenCards = [];
       });
     },
   },
